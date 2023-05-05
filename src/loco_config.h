@@ -103,15 +103,15 @@
 
 // =====================================
 //
-// DRIVE DATA
+// CONTROLLER DATA
 //
 // =====================================
 
 /*
- * 7 byte package
+ * 7 byte package sent from the controller
  *
  * byte 0:   7      6      5      4      3      2      1      0
- *         error  ready   stop  paired  aux    dir   drive  mains
+ *         error  aux-1   aux  horn-h  horn-l  dir   drive  mains
  *
  * paired: the controller is paired (only set, if paired motor is present)
  *
@@ -128,6 +128,18 @@
  * byte 6: break bit 0-7
  */
 
+#define CONTROL_ERROR_FLAG 7
+
+#define CONTROL_AUX_1_FLAG 6
+#define CONTROL_AUX_FLAG 5
+
+#define CONTROL_HORN_H_FLAG 4
+#define CONTROL_HORN_L_FLAG 3
+
+#define CONTROL_DIR_FLAG 2
+#define CONTROL_DRIVE_FLAG 1
+#define CONTROL_MAINS_FLAG 0
+
 
 // =====================================
 //
@@ -136,16 +148,17 @@
 // =====================================
 
 /*
- * 1 byte package
- * MOTOR STATUS
+ * 1 byte package sent from the vehicle
+ *
+ * VEHICLE STATUS
  * byte 0:   7      6      5      4      3      2      1      0
- *         error  ready   stop  paired reverse dir   drive  mains
+ *         error  ready   stop        reverse dir   drive  mains
  *
  * error:   motor drive reports an error
  * ready:   ready to drive
  * stop:    loco is standing
- * paired:  motor is paired with controller (only set, if paired controller is present)
- * reverse: reverse dir signal
+ *
+ * reverse: if true, reverse dir signal
  * dir:     drive direction (0=forward, 1=reverse)
  * drive:   drive is activated
  * mains:   main switch state
@@ -156,10 +169,10 @@
 #define READY_FLAG 6
 #define STOP_FLAG 5
 
-#define PUMP_FLAG 3
+#define REVERSE 3
 
 #define DIR_FLAG 2
-#define DRIVE_FLAG 1
+#define CONTROL_FLAG 1
 #define MAINS_FLAG 0
 
 
