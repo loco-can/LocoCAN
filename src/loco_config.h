@@ -25,6 +25,22 @@
 //
 // =====================================
 
+
+// =====================================
+// Board versions:
+// 
+#define BOARD_V_1_0 0x01 // V1.0
+#define BOARD_V_1_2 0x02 // V1.2
+#define BOARD_V_2_0 0x03 // V2.0
+#define BOARD_WIFI_V_2_1 0x04 // WIFI V2.1
+#define BOARD_UNIV_V_2_1 0x05 // UNIVERSIAL V2.1
+#define BOARD_MICRO_V_2_2 0x70 // ATtiny85 MICRO BOARD V2.2
+
+
+#define BOARD_DIGISPARK 0xFF// Digispark developement
+// =====================================
+
+
 // uncommend to get Serial debug information 
 #define DEBUG
 
