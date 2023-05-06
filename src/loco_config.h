@@ -168,11 +168,11 @@
  *
  * VEHICLE STATUS
  * byte 0:   7      6      5      4      3      2      1      0
- *         error  ready   stop        reverse dir   drive  mains
+ *         error  ready  moving         revs   dir   drive  mains
  *
  * error:   motor drive reports an error
  * ready:   ready to drive
- * stop:    loco is standing
+ * moving:  loco is moving
  *
  * reverse: if true, reverse dir signal
  * dir:     drive direction (0=forward, 1=reverse)
@@ -183,7 +183,7 @@
 
 #define ERROR_FLAG 7
 #define READY_FLAG 6
-#define STOP_FLAG 5
+#define MOVING_FLAG 5
 
 #define REVERSE 3
 
