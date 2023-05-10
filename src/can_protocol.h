@@ -53,7 +53,114 @@
 
 
 // =====================================
+// 
+// controller message
+// 
+// =====================================
+
+/*
+ * The controller message are sent to all vehicles, when it is activated (mains = on).
+ */
+
+/*
+ * 8 byte package sent from the controller
+ *
+ * byte 0:   7      6      5      4      3      2      1      0
+ *         error  aux-1   aux  horn-h  horn-l  dir   drive  mains
+ * byte 1:   7      6      5      4      3      2      1      0
+ *
+ *
+ * paired: the controller is paired (only set, if paired motor is present)
+ *
+ * DRIVE VALUE: 10-bit value of drive voltage
+ * byte 2: drive bit 8-9
+ * byte 3: drive bit 0-7
+ *
+ * POWER VALUE: 10-bit value of drive max power
+ * byte 4: power bit 8-9
+ * byte 5: power bit 0-7
+ *
+ * BREAK VALUE: 10-bit value of break intensity
+ * byte 6: break bit 8-9
+ * byte 7: break bit 0-7
+ */
+
+
+// =====================================
+//
+// SIGNAL DATA?????
+//
+// =====================================
+
+/*
+ * 1 byte package
+ *
+ * SIGNAL STATUS
+ * byte 0:   7      6      5      4      3      2      1      0
+ *                                             bell   low   high
+ *
+ * high:    hight frequence signal
+ * low:     low frequence signal
+ * bell:    signal bell
+ */
+
+// =====================================
+// 
+// vehicle messages
+// 
+// =====================================
+
+/*
+ * The vehicle message are sent from each vehicle when a mains on is received.
+ */
+
+/*
+ * 1 byte package sent from the vehicle
+ *
+ * VEHICLE STATUS
+ * byte 0:   7      6      5      4      3      2      1      0
+ *         error  ready  moving         revs   dir   drive  mains
+ *
+ * error:   motor drive reports an error
+ * ready:   ready to drive
+ * moving:  loco is moving
+ *
+ * reverse: if true, reverse dir signal
+ * dir:     drive direction (0=forward, 1=reverse)
+ * drive:   drive is activated
+ * mains:   main switch state
+ */
+
+
+// =====================================
+//
+// LIGHT DATA
+//
+// =====================================
+
+/*
+ * 1 byte package
+ *
+ * LIGHT_STATUS
+ * byte 0:   7      6      5      4      3      2      1      0
+ *          main  train   cab   instr   back    high   low   posit
+ *
+ * main:    main light switch
+ * train:   train lights
+ * cab:     cabine light
+ * instr:   instrument light
+ * back:    back light
+ * high:    bright spot light
+ * low:     low spot light
+ * posit:   position light
+ */
+
+
+// =====================================
+// 
 // setup
+// 
+// =====================================
 
 // the setup command is used to send and receive module setup data
 //		0x7FF		request setup info from module (0 byte message length)
@@ -74,6 +181,7 @@
 //			byte 2		=> message id
 //				0xFF = module name
 //			bytes 3-7 	=> data
+
 #define CAN_REQUEST_MASK 0x7FF
 #define CAN_ID_REQUEST 0x7FF
 

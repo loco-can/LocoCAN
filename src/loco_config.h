@@ -118,32 +118,7 @@
 
 
 // =====================================
-//
-// CONTROLLER DATA
-//
-// =====================================
-
-/*
- * 7 byte package sent from the controller
- *
- * byte 0:   7      6      5      4      3      2      1      0
- *         error  aux-1   aux  horn-h  horn-l  dir   drive  mains
- *
- * paired: the controller is paired (only set, if paired motor is present)
- *
- * DRIVE VALUE: 10-bit value of drive voltage
- * byte 1: drive bit 8-9
- * byte 2: drive bit 0-7
- *
- * POWER VALUE: 10-bit value of drive max power
- * byte 3: power bit 8-9
- * byte 4: power bit 0-7
- *
- * BREAK VALUE: 10-bit value of break intensity
- * byte 5: break bit 8-9
- * byte 6: break bit 0-7
- */
-
+// CONTROLLER
 #define CONTROL_ERROR_FLAG 7
 
 #define CONTROL_AUX_1_FLAG 6
@@ -158,28 +133,7 @@
 
 
 // =====================================
-//
-// MOTOR STATUS DATA
-//
-// =====================================
-
-/*
- * 1 byte package sent from the vehicle
- *
- * VEHICLE STATUS
- * byte 0:   7      6      5      4      3      2      1      0
- *         error  ready  moving         revs   dir   drive  mains
- *
- * error:   motor drive reports an error
- * ready:   ready to drive
- * moving:  loco is moving
- *
- * reverse: if true, reverse dir signal
- * dir:     drive direction (0=forward, 1=reverse)
- * drive:   drive is activated
- * mains:   main switch state
- */
-
+// VEHICLE
 
 #define ERROR_FLAG 7
 #define READY_FLAG 6
@@ -192,29 +146,7 @@
 #define MAINS_FLAG 0
 
 
-// =====================================
-//
-// LIGHT DATA
-//
-// =====================================
-
-/*
- * 1 byte package
- *
- * LIGHT_STATUS
- * byte 0:   7      6      5      4      3      2      1      0
- *          main  train   cab   instr   back    high   low   posit
- *
- * main:    main light switch
- * train:   train lights
- * cab:     cabine light
- * instr:   instrument light
- * back:    back light
- * high:    bright spot light
- * low:     low spot light
- * posit:   position light
- */
-
+// LIGHT
 #define LIGHT_MAIN 7
 #define LIGHT_TRAIN 6
 #define LIGHT_CAB 5
@@ -225,24 +157,7 @@
 #define LIGHT_POSIT 0
 
 
-// =====================================
-//
-// SIGNAL DATA
-//
-// =====================================
-
-/*
- * 1 byte package
- *
- * SIGNAL STATUS
- * byte 0:   7      6      5      4      3      2      1      0
- *                                             bell   low   high
- *
- * high:    hight frequence signal
- * low:     low frequence signal
- * bell:    signal bell
- */
-
+// SIGNAL
 #define SIGNAL_HIGH 0
 #define SIGNAL_LOW 1
 #define SIGNAL_BELL 2
