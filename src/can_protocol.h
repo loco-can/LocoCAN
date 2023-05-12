@@ -60,6 +60,10 @@
 
 /*
  * The controller message are sent to all vehicles, when it is activated (mains = on).
+ *
+ * If a multi traktion is recognised by the controller when activated, it 15 of byte 2
+ * is set to 1 and the uuid of the main locomotive is sent in bytes 2, 4 and 6.
+ * All other locomotives are running in slave mode with no lights or pantographs.
  */
 
 /*
@@ -68,20 +72,22 @@
  * byte 0:   7      6      5      4      3      2      1      0
  *         error  aux-1   aux  horn-h  horn-l  dir   drive  mains
  * byte 1:   7      6      5      4      3      2      1      0
- *
- *
- * paired: the controller is paired (only set, if paired motor is present)
+ *                                                          
  *
  * DRIVE VALUE: 10-bit value of drive voltage
- * byte 2: drive bit 8-9
+ * byte 2: bits 10-14 = multi traktion main UUID bits 11-15
+ *         bit 16 = 1: multi traktion
+ *         drive bit 8-9
  * byte 3: drive bit 0-7
  *
  * POWER VALUE: 10-bit value of drive max power
- * byte 4: power bit 8-9
+ * byte 4: bits 10-15 = multi traktion main UUID bits 6-10
+ *         power bit 8-9
  * byte 5: power bit 0-7
  *
  * BREAK VALUE: 10-bit value of break intensity
- * byte 6: break bit 8-9
+ * byte 6: bits 10-15 = multi traktion main UUID bits 0-5
+ *         break bit 8-9
  * byte 7: break bit 0-7
  */
 
@@ -153,6 +159,30 @@
  * high:    bright spot light
  * low:     low spot light
  * posit:   position light
+ */
+
+
+// =====================================
+// 
+// loco setup
+// 
+// =====================================
+
+/*
+ * 3 byte package
+ *
+ * LOCO_SETUP
+ * byte 0:   7      6      5      4      3      2      1      0
+ *                                                  disable  status
+ *
+ * status:      loco setup status
+                0 = select: the master loco is selected
+                1 = direction: reverse the direction in the loco
+ * disable:     0: loco is active
+                1: loco is deactivated
+                    sends mains = on, drive = on, ready = true, moving = false
+ * byte 1:  LSB of the locomotive UUID to setup
+ * byte 2:  MSB of the locomotive UUID to setup
  */
 
 
