@@ -117,52 +117,6 @@
 // 0x7n
 
 
-// =====================================
-// CONTROLLER
-#define CONTROL_ERROR_FLAG 7
-
-#define CONTROL_AUX_1_FLAG 6
-#define CONTROL_AUX_FLAG 5
-
-#define CONTROL_HORN_H_FLAG 4
-#define CONTROL_HORN_L_FLAG 3
-
-#define CONTROL_DIR_FLAG 2
-#define CONTROL_DRIVE_FLAG 1
-#define CONTROL_MAINS_FLAG 0
-
-
-// =====================================
-// VEHICLE
-
-#define ERROR_FLAG 7
-#define READY_FLAG 6
-#define MOVING_FLAG 5
-
-#define REVERSE 3
-
-#define DIR_FLAG 2
-#define CONTROL_FLAG 1
-#define MAINS_FLAG 0
-
-
-// LIGHT
-#define LIGHT_MAIN 7
-#define LIGHT_TRAIN 6
-#define LIGHT_CAB 5
-#define LIGHT_INSTR 4
-#define LIGHT_BACK 3
-#define LIGHT_HIGH 2
-#define LIGHT_LOW 1
-#define LIGHT_POSIT 0
-
-
-// SIGNAL
-#define SIGNAL_HIGH 0
-#define SIGNAL_LOW 1
-#define SIGNAL_BELL 2
-
-
 // ==================================
 //
 // ATMEL ATMEGA8 & 168/328 / ARDUINO

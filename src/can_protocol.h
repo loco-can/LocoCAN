@@ -34,8 +34,8 @@
 #define CAN_ID_LIGHT 0x410
 #define CAN_ID_SWITCH 0x420
 
-// status values
-#define CAN_ID_DRIVE_STATUS 0x500
+// vehicle status values
+#define CAN_ID_VEHICLE_STATUS 0x500
 
 // message heartbeat
 #define CAN_ID_MODULE_HEARTBEAT 0x510 // heartbeat sent from modules
@@ -54,7 +54,7 @@
 
 // =====================================
 // 
-// controller message
+// controller message CAN_ID_DRIVE
 // 
 // =====================================
 
@@ -68,9 +68,10 @@
 
 /*
  * 8 byte package sent from the controller
+ * the buttons for horn-h and horn-l are used for up and down signals
  *
  * byte 0:   7      6      5      4      3      2      1      0
- *         error  aux-1   aux  horn-h  horn-l  dir   drive  mains
+ *         error  aux-1   aux    down   up     dir   drive  mains
  * byte 1:   7      6      5      4      3      2      1      0
  *                                                          
  *
@@ -91,10 +92,24 @@
  * byte 7: break bit 0-7
  */
 
+// =====================================
+// CONTROLLER
+#define CONTROL_ERROR_FLAG 7
+
+#define CONTROL_AUX_1_FLAG 6
+#define CONTROL_AUX_FLAG 5
+
+#define CONTROL_DOWN_FLAG 4
+#define CONTROL_UP_FLAG 3
+
+#define CONTROL_DIR_FLAG 2
+#define CONTROL_DRIVE_FLAG 1
+#define CONTROL_MAINS_FLAG 0
+
 
 // =====================================
 //
-// SIGNAL DATA?????
+// SIGNAL DATA
 //
 // =====================================
 
@@ -110,6 +125,12 @@
  * bell:    signal bell
  */
 
+// SIGNAL
+#define SIGNAL_HIGH 0
+#define SIGNAL_LOW 1
+#define SIGNAL_BELL 2 // not yet impemented
+
+
 // =====================================
 // 
 // vehicle messages
@@ -121,11 +142,13 @@
  */
 
 /*
- * 1 byte package sent from the vehicle
+ * 3 byte package sent from the vehicle
  *
  * VEHICLE STATUS
  * byte 0:   7      6      5      4      3      2      1      0
  *         error  ready  moving         revs   dir   drive  mains
+ * byte 1: MSB of UUID
+ * byte 2: LSB of UUID
  *
  * error:   motor drive reports an error
  * ready:   ready to drive
@@ -136,6 +159,19 @@
  * drive:   drive is activated
  * mains:   main switch state
  */
+
+// =====================================
+// VEHICLE
+
+#define ERROR_FLAG 7
+#define READY_FLAG 6
+#define MOVING_FLAG 5
+
+#define REVERSE 3
+
+#define DIR_FLAG 2
+#define CONTROL_FLAG 1
+#define MAINS_FLAG 0
 
 
 // =====================================
@@ -160,6 +196,16 @@
  * low:     low spot light
  * posit:   position light
  */
+
+// LIGHT
+#define LIGHT_MAIN 7
+#define LIGHT_TRAIN 6
+#define LIGHT_CAB 5
+#define LIGHT_INSTR 4
+#define LIGHT_BACK 3
+#define LIGHT_HIGH 2
+#define LIGHT_LOW 1
+#define LIGHT_POSIT 0
 
 
 // =====================================
