@@ -147,8 +147,8 @@
  * VEHICLE STATUS
  * byte 0:   7      6      5      4      3      2      1      0
  *         error  ready  moving         revs   dir   drive  mains
- * byte 1: MSB of UUID
- * byte 2: LSB of UUID
+ * byte 1: LSB of UUID
+ * byte 2: MSB of UUID
  *
  * error:   motor drive reports an error
  * ready:   ready to drive
@@ -167,10 +167,11 @@
 #define READY_FLAG 6
 #define MOVING_FLAG 5
 
-#define REVERSE 3
+#define MULTI_FLAG 4
 
+#define REVERSE 3
 #define DIR_FLAG 2
-#define CONTROL_FLAG 1
+#define DRIVE_FLAG 1
 #define MAINS_FLAG 0
 
 
@@ -230,6 +231,9 @@
  * byte 1:  LSB of the locomotive UUID to setup
  * byte 2:  MSB of the locomotive UUID to setup
  */
+
+#define CAN_ID_LOCO_SETUP 0x0600
+#define CAN_LOCO_SETUP_MASK 0x06FF
 
 
 // =====================================
