@@ -1,0 +1,59 @@
+#include "test_support.h"
+
+#include "can_protocol.h"
+#include "loco_sim/protocol.h"
+#include "loco_sim/virtual_bus.h"
+
+#include <cmath>
+
+TEST(header_can_ids_match_published_protocol) {
+    CHECK_EQ(CAN_ID_CURRENT, 0x100);
+    CHECK_EQ(CAN_ID_MOTOR_CURRENT, 0x110);
+    CHECK_EQ(CAN_ID_BATT_CURRENT, 0x120);
+    CHECK_EQ(CAN_ID_LIGHT_CURRENT, 0x130);
+    CHECK_EQ(CAN_ID_SPEED, 0x200);
+    CHECK_EQ(CAN_ID_DIR, 0x210);
+    CHECK_EQ(CAN_ID_SIGNAL, 0x220);
+    CHECK_EQ(CAN_ID_TACHO, 0x230);
+    CHECK_EQ(CAN_ID_VOLTAGE, 0x300);
+    CHECK_EQ(CAN_ID_MOTOR_VOLTAGE, 0x310);
+    CHECK_EQ(CAN_ID_BATT_VOLTAGE, 0x320);
+    CHECK_EQ(CAN_ID_BATT_1_VOLTAGE, 0x321);
+    CHECK_EQ(CAN_ID_BATT_2_VOLTAGE, 0x322);
+    CHECK_EQ(CAN_ID_DRIVE, 0x400);
+    CHECK_EQ(CAN_ID_LIGHT, 0x410);
+    CHECK_EQ(CAN_ID_SWITCH, 0x420);
+    CHECK_EQ(CAN_ID_VEHICLE_STATUS, 0x500);
+    CHECK_EQ(CAN_ID_MODULE_HEARTBEAT, 0x510);
+    CHECK_EQ(CAN_ID_DRIVE_HEARTBEAT, 0x010);
+    CHECK_EQ(CAN_ID_TRAINEND_HEARTBEAT, 0x020);
+    CHECK_EQ(CAN_ID_LOCO_SETUP, 0x0600);
+    CHECK_EQ(CAN_ID_REQUEST, 0x7FF);
+    CHECK_EQ(CAN_ID_REPLY, 0x780);
+    CHECK_EQ(CAN_ID_MASK, 0x770);
+}
+
+TEST(header_flag_bit_positions) {
+    CHECK_EQ(CONTROL_MAINS_FLAG, 0);
+    CHECK_EQ(CONTROL_DRIVE_FLAG, 1);
+    CHECK_EQ(CONTROL_DIR_FLAG, 2);
+    CHECK_EQ(CONTROL_ERROR_FLAG, 7);
+    CHECK_EQ(MAINS_FLAG, 0);
+    CHECK_EQ(READY_FLAG, 6);
+    CHECK_EQ(ERROR_FLAG, 7);
+    CHECK_EQ(LIGHT_POSIT, 0);
+    CHECK_EQ(LIGHT_MAIN, 7);
+    CHECK_EQ(SIGNAL_HIGH, 0);
+    CHECK_EQ(SIGNAL_BELL, 2);
+}
+
+TEST(bus_speed_macro_is_500k) {
+    CHECK(std::abs(CAN_BUS_SPEED - 500000.0) < 0.1);
+}
+
+TEST(id_mask_groups_battery_voltages) {
+    CHECK(loco_sim::filter_match(CAN_ID_BATT_VOLTAGE, CAN_ID_MASK, CAN_ID_BATT_VOLTAGE));
+    CHECK(loco_sim::filter_match(CAN_ID_BATT_1_VOLTAGE, CAN_ID_MASK, CAN_ID_BATT_VOLTAGE));
+    CHECK(loco_sim::filter_match(CAN_ID_BATT_2_VOLTAGE, CAN_ID_MASK, CAN_ID_BATT_VOLTAGE));
+    CHECK(!loco_sim::filter_match(CAN_ID_DRIVE, CAN_ID_MASK, CAN_ID_BATT_VOLTAGE));
+}

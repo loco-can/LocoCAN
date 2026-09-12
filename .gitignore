@@ -1,0 +1,12 @@
+/build/
+/cmake-build-*/
+/.cache/
+compile_commands.json
+*.o
+*.a
+*.out
+CMakeCache.txt
+CMakeFiles/
+*.user
+.idea/
+.vscode/
