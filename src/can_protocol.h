@@ -4,6 +4,9 @@
 //
 // =====================================
 
+#ifndef LOCO_CAN_PROTOCOL_H
+#define LOCO_CAN_PROTOCOL_H
+
 #define CAN_BUS_SPEED 500E3
 
 // MASK: bit=0 > bit of packetId is ignored
@@ -274,3 +277,5 @@
 
 #define CAN_NAME_MAX_SIZE 5
 #define CAN_VALUE_MAX_SIZE 6
+
+#endif /* LOCO_CAN_PROTOCOL_H */
